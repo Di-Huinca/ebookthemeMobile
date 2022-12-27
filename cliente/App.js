@@ -1,8 +1,21 @@
 import React from "react";
-import { Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+//Importacion de screens
+import HomeScreen from "./screens/HomeScreen";
+import ClaseFormScreen from "./screens/ClaseFormScreen";
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
-  return <Text>Hola hero </Text>;
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 };
 
 export default App;
