@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { getClases } from "../api";
 
 //componentes
+import Layout from "../src/components/Layout";
 import ClaseList from "../src/components/ClaseList";
 
 const HomeScreen = () => {
@@ -18,10 +19,9 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View>
-      <ClaseList clases = {clases}/>
-      <Text>Hola puro</Text>
-    </View>
+    <Layout>
+      <ClaseList clases={clases} />
+    </Layout>
   );
 };
 
