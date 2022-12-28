@@ -12,7 +12,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="HomeScreen" component={HomeScreen} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Clase" component={ClaseFormScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
