@@ -1,28 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text } from "react-native";
-import { getClases } from "../api";
 
 //componentes
 import Layout from "../src/components/Layout";
 import ClaseList from "../src/components/ClaseList";
 
-const HomeScreen = () => {
-  const [clases, setClases] = useState([]);
-
-  const loadClases = async () => {
-    const data = await getClases();
-    setClases(data);
-  };
-
-  useEffect(() => {
-    loadClases();
-  }, []);
-
-  return (
-    <Layout>
-      <ClaseList clases={clases} />
-    </Layout>
-  );
-};
+const HomeScreen = () => (
+  <Layout>
+    <ClaseList />
+  </Layout>
+);
 
 export default HomeScreen;
