@@ -5,22 +5,35 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Layout from "../src/components/Layout";
-import { saveClase } from "../api";
+import { saveClase, getClase } from "../api";
 
-const ClaseFormScreen = ({ navigation }) => {
-  const [clase, setclase] = useState({
+const ClaseFormScreen = ({ navigation, route }) => {
+  const [clase, setClase] = useState({
     title: "",
     description: "",
   });
 
-  const handleChange = (name, value) => setclase({ ...clase, [name]: value });
+  const handleChange = (name, value) => setClase({ ...clase, [name]: value });
   const handleSubmit = () => {
     saveClase(clase);
-    navigation.navigate('Home')
+    navigation.navigate("Home");
   };
+
+  useEffect(() => {
+    if (route.params && route.params.id) {
+      console.log(route.params);
+      navigation.setOptions({ headerTitle: "Editar clase" }); //error: al entrar primero en una clase con id luego si quiero crear una nueva tarea el titulo es "editar clase" y no "nueva clase"
+
+      (async () => {
+        const clase = await getClase(route.params.id);
+        setClase({title: clase.title, description: clase.description})
+      })();
+    }
+  }, []);
+
   return (
     <Layout>
       <TextInput
@@ -28,13 +41,15 @@ const ClaseFormScreen = ({ navigation }) => {
         placeholder="Escriba un titulo"
         placeholderTextColor="#546576"
         onChangeText={(text) => handleChange("title", text)}
-      />
+        value={clase.title}
+        />
       <TextInput
         style={styles.input}
         placeholder="Escriba una descripción"
         placeholderTextColor="#546576"
         onChangeText={(text) => handleChange("description", text)}
-      />
+        value={clase.description}
+        />
 
       <TouchableOpacity style={styles.buttonSave} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Guardar</Text>

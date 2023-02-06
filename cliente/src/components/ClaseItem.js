@@ -1,10 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
 const ClaseItem = ({ clase, handleDelete }) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.itemContainer}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ClaseForm", { id: clase.id })}
+      >
         <Text style={styles.itemTitle}>{clase.title}</Text>
         <Text style={styles.itemDescription}>{clase.description}</Text>
       </TouchableOpacity>

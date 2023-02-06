@@ -7,6 +7,11 @@ export const getClases = async () => {
   return await res.json();
 };
 
+export const getClase = async (id) => {
+  const res = await fetch(`${API}/${id}`);
+  return await res.json();
+};
+
 export const saveClase = async (newClase) => {
   const res = await fetch(API, {
     method: "POST",
